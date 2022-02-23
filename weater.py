@@ -12,15 +12,15 @@ def get_iciba_everyday():
     bee = eed.json()  #返回的数据
     english = bee['content']
     zh_CN = bee['note']
-    str = '【奇怪的知识】\n' + english + '\n' + zh_CN
+    str = '【每日一句】\n' + english + '\n' + zh_CN
     return str
 
 def ServerPush(info): #Server酱推送
-    api = "https://sc.ftqq.com/{}.send".format(SCKEY)
+    api = "https://sctapi.ftqq.com/{}.send".format(SCKEY)
     title = u"天气推送"
     content = info.replace('\n','\n\n')
     data = {
-        "text": title,
+        "title": title,
         "desp": content
     }
     print(content)
@@ -35,7 +35,7 @@ def CoolPush(info): #CoolPush酷推
 def main():
     try:
         api = 'http://t.weather.itboy.net/api/weather/city/'             #API地址，必须配合城市代码使用
-        city_code = '101240110'   #进入https://where.heweather.com/index.html查询你的城市代码
+        city_code = '101020600'   #进入https://where.heweather.com/index.html查询你的城市代码
         tqurl = api + city_code
         response = requests.get(tqurl)
         d = response.json()         #将数据以json形式返回，这个d就是返回的json数据
@@ -64,7 +64,7 @@ def main():
             # print(tdwt)
             # requests.post(cpurl,tdwt.encode('utf-8'))         #把天气数据转换成UTF-8格式，不然要报错。
             ServerPush(tdwt)
-            CoolPush(tdwt)
+            # CoolPush(tdwt)
     except Exception:
         error = '【出现错误】\n　　今日天气推送错误，请检查服务或网络状态！'
         print(error)
