@@ -69,6 +69,8 @@ def main():
             tdwt = f"""
 # 今日份天气
 
+> {tips}
+
 **城市**： {parent} {city}
 **日期**： {date} {week}
 **天气**： {weather_type}
@@ -79,7 +81,6 @@ def main():
 **空气质量**： {quality}
 **风力风向**： {fl} {fx}
 **感冒指数**： {ganmao}
-**温馨提示**： {tips}
 **更新时间**： {update_time}
 
 """
