@@ -52,17 +52,12 @@ def main():
             parent = d["cityInfo"]["parent"] #省
             city = d["cityInfo"]["city"] #市
             update_time = d["time"] #更新时间
-            date = d["data"]["forecast"][0]["ymd"] #日期
-            week = d["data"]["forecast"][0]["week"] #星期
-            weather_type = d["data"]["forecast"][0]["type"] # 天气
-            wendu_high = d["data"]["forecast"][0]["high"] #最高温度
-            wendu_low = d["data"]["forecast"][0]["low"] #最低温度
+            forecast = d["data"]["forecast"]
             shidu = d["data"]["shidu"] #湿度
             pm25 = str(d["data"]["pm25"]) #PM2.5
             pm10 = str(d["data"]["pm10"]) #PM10
             quality = d["data"]["quality"] #天气质量
-            fx = d["data"]["forecast"][0]["fx"] #风向
-            fl = d["data"]["forecast"][0]["fl"] #风力
+
             ganmao = d["data"]["ganmao"] #感冒指数
             tips = d["data"]["forecast"][0]["notice"] #温馨提示
             # 天气提示内容
@@ -72,25 +67,22 @@ def main():
 > {tips}
 
 **城市**： {parent} {city}
-**日期**： {date} {week}
-**天气**： {weather_type}
-**温度**： {wendu_high} / {wendu_low}
+**温度**： {wendu}℃
 **湿度**： {shidu}
 **PM2.5**： {pm25}
 **PM10**： {pm10}
-**空气质量**： {quality}
-**风力风向**： {fl} {fx}
 **感冒指数**： {ganmao}
 **更新时间**： {update_time}
-
+# 一周天气
 """
 
-            #tdwt = "【今日份天气】\n城市： " + parent + city + \
-            #       "\n日期： " + date + "\n星期: " + week + "\n天气: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
-            #        shidu + "\nPM25: " + pm25 + "\nPM10: " + pm10 + "\n空气质量: " + quality + \
-            #       "\n风力风向: " + fx + fl + "\n感冒指数: "  + ganmao + "\n温馨提示： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
-            # print(tdwt)
-            # requests.post(cpurl,tdwt.encode('utf-8'))         #把天气数据转换成UTF-8格式，不然要报错。
+            tdwt += f"| 今天 |  明天 | {forecast[2]['date']} |{forecast[3]['date']} |{forecast[4]['date']} |{forecast[5]['date']} |{forecast[6]['date']} |\n" \
+            "| :------------: |:---------------:| :-----:| :-----:| :-----:| :-----:| :-----:|\n"
+            tdwt += f"| {forecast[0]['high']} | {forecast[1]['high']} | {forecast[2]['high']} | {forecast[3]['high']} | {forecast[4]['high']} | {forecast[5]['high']} | {forecast[6]['high']} |\n"
+            tdwt += f"| {forecast[0]['low']} | {forecast[1]['low']} | {forecast[2]['low']} | {forecast[3]['low']} | {forecast[4]['low']} | {forecast[5]['low']} | {forecast[6]['low']} |\n"
+            tdwt += f"| {forecast[0]['type']} | {forecast[1]['type']} | {forecast[2]['type']} | {forecast[3]['type']} | {forecast[4]['type']} | {forecast[5]['type']} | {forecast[6]['type']} |\n"
+            tdwt += f"| {forecast[0]['fx']} | {forecast[1]['fx']} | {forecast[2]['fx']} | {forecast[3]['fx']} | {forecast[4]['fx']} | {forecast[5]['fx']} | {forecast[6]['fx']} |\n"
+            tdwt += f"| {forecast[0]['fl']} | {forecast[1]['fl']} | {forecast[2]['fl']} | {forecast[3]['fl']} | {forecast[4]['fl']} | {forecast[5]['fl']} | {forecast[6]['fl']} |\n"
             ServerPush(tdwt +  get_iciba_everyday())
             # CoolPush(tdwt)
     except Exception:
