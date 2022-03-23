@@ -52,6 +52,7 @@ def main():
             parent = d["cityInfo"]["parent"] #省
             city = d["cityInfo"]["city"] #市
             update_time = d["time"] #更新时间
+            wendu = d["data"]["wendu"]
             forecast = d["data"]["forecast"]
             shidu = d["data"]["shidu"] #湿度
             pm25 = str(d["data"]["pm25"]) #PM2.5
