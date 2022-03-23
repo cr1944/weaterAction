@@ -74,7 +74,9 @@ def main():
 **PM10**： {pm10}
 **感冒指数**： {ganmao}
 **更新时间**： {update_time}
+
 # 一周天气
+
 """
 
             tdwt += f"| 今天 |  明天 | {forecast[2]['date']} |{forecast[3]['date']} |{forecast[4]['date']} |{forecast[5]['date']} |{forecast[6]['date']} |\n" \
